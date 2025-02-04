@@ -1,0 +1,11 @@
+Descripcion del proyecto Tarea 1 parte 1 
+
+La clase Nodo representa un nodo del árbol con un dato y referencias a sus subárboles izquierdo y derecho.
+El método insertar(dato) añade un nuevo nodo al árbol de manera recursiva, manteniendo el orden de un ABB.
+Si el dato es menor que el nodo actual, se inserta en el subárbol izquierdo; si es mayor, en el derecho.
+La raíz se actualiza si el árbol estaba vacío al inicio de la inserción.
+El método imprimirArbol() recorre el árbol en orden (izquierda, raíz, derecha) y muestra los valores ordenados.
+La función interna _inorden(nodo) se usa para recorrer recursivamente el árbol.
+Este árbol permite almacenar y buscar datos de forma eficiente, útil en bases de datos y estructuras de indexación.
+La complejidad de búsqueda e inserción es O(log n) en promedio, pero puede llegar a O(n) en el peor caso.
+Puede expandirse con más funciones, como eliminar nodos o buscar elementos específicos.
