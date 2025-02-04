@@ -1,2 +1,2 @@
 # Inteligencia-Artificial-11-12
-Tareas, Trabajos, Proyectos 
+descripcion de arbol binario tarea 1 parte 1 
