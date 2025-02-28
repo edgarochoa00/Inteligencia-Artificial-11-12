@@ -3,7 +3,7 @@
 INSTITUTO TECNOLOGICO DE CULIACAN 
 
 Integrantes:
-Alonso Castro Vega
+Alonso Castro Vega -
 Edgar Ochoa Aviles
 						
 Carrera:
