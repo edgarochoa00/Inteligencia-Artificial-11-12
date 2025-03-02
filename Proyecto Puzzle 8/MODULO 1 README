@@ -1,0 +1,28 @@
+En este proyecto, se implementó un resolvedor del puzzle 8 
+utilizando el algoritmo de búsqueda A* con una heurística de
+distancia euclidiana. El objetivo fue encontrar la secuencia 
+óptima de movimientos para llevar el puzzle desde un estado 
+inicial dado hasta el estado objetivo. Se incluyó un sistema 
+de puntuación que recompensa los movimientos correctos y penaliza 
+los incorrectos, así como una verificación de solubilidad para evitar
+intentar resolver puzzles sin solución. El programa muestra los 
+resultados en una tabla comparativa, incluyendo métricas como movimientos,
+nodos explorados, costo total y tiempo de ejecución.
+
+
+
+
+INSTITUTO TECNOLOGICO DE CULIACAN
+
+Integrantes: Alonso Castro Vega - Edgar Ochoa Aviles
+
+Carrera: Ingeniería En Sistemas Computacionales
+
+Materia: Inteligencia Artificial
+
+Proyecto Puzzle 8 - 
+Modulo 1 
+
+Profesor: ZURIEL DATHAN MORA FELIX
+
+Grupo: 11:00 a 12:00 a.m
