@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explora la plataforma más innovadora de streaming y red social. Contenido exclusivo y comunidad global, todo en un solo lugar.">
+    <meta name="keywords" content="streaming, social network, películas, series, comunidad, entretenimiento">
+    <meta name="author" content="InnovateStream">
+    <title>InnovateStream - Revoluciona tu Experiencia</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Estilos para la sección con fondo de imagen */
+        .hero-section {
+            background-image: url('img/hero.jpg'); /* Ruta de la imagen */
+            background-size: cover; /* Ajusta la imagen para cubrir toda la sección */
+            background-position: center; /* Centra la imagen */
+            background-repeat: no-repeat; /* Evita que la imagen se repita */
+            height: 100vh; /* Altura de la sección (100% del viewport) */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white; /* Color del texto para que sea legible sobre la imagen */
+            text-align: center;
+            padding: 20px; /* Espaciado interno */
+        }
+
+        /* Estilos para el contenido dentro de la sección */
+        .hero-content {
+            background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para mejorar la legibilidad */
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px; /* Ancho máximo del contenido */
+        }
+
+        /* Ajustes para el resto de la página */
+        .container.my-5 {
+            margin-top: 20px !important; /* Asegura que el contenido no se solape con el hero section */
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation y Perfil -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">InnovateStream</a>
+            <!-- Perfil en la parte superior izquierda -->
+            <div class="d-flex align-items-center ms-auto">
+                <div class="dropdown">
+                    <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="img/p1.jpg" alt="Foto de perfil" class="rounded-circle me-2" style="width: 40px; height: 40px;">
+                        <span id="username">Nombre de Usuario</span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                        <li><a class="dropdown-item" href="#" onclick="editProfile()">Editar Perfil</a></li>
+                        <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+                    </ul>
+                </div>
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#feed">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#friends">Amigos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#messages">Mensajes</a>
+                    </li>
+                </ul>
+                <form class="d-flex" onsubmit="searchProfiles(event)">
+                    <input class="form-control me-2" type="search" id="searchInput" placeholder="Buscar perfiles" aria-label="Buscar">
+                    <button class="btn btn-outline-success" type="submit">Buscar</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section con fondo de imagen -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>Bienvenido a InnovateStream</h1>
+            <p>La plataforma más innovadora de streaming y red social.</p>
+            <a href="#feed" class="btn btn-primary">Explorar</a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <!-- Feed de Publicaciones -->
+        <section id="feed" class="mb-5">
+            <h2 class="text-center mb-4">Inicio</h2>
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <!-- Formulario para crear una publicación -->
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <textarea id="postContent" class="form-control mb-3" rows="3" placeholder="¿Qué estás pensando?"></textarea>
+                            <button id="postButton" class="btn btn-primary">Publicar</button>
+                        </div>
+                    </div>
+
+                    <!-- Publicaciones -->
+                    <div id="postsContainer"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resultados de Búsqueda -->
+        <section id="searchResults" class="mb-5">
+            <h2 class="text-center mb-4">Resultados de Búsqueda</h2>
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <div id="resultsContainer" class="list-group"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Amigos -->
+        <section id="friends" class="mb-5">
+            <h2 class="text-center mb-4">Amigos</h2>
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Lista de Amigos</h5>
+                            <ul id="friendsList" class="list-group"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mensajes -->
+        <section id="messages" class="mb-5">
+            <h2 class="text-center mb-4">Mensajes</h2>
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Chats</h5>
+                            <ul id="messagesList" class="list-group"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; 2025 InnovateStream. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+    <!-- JavaScript para interactividad -->
+    <script>
+        // Función para buscar perfiles
+        function searchProfiles(event) {
+            event.preventDefault(); // Evitar que el formulario se envíe
+
+            // Recuperar los perfiles del LocalStorage
+            const storedProfiles = JSON.parse(localStorage.getItem('profiles')) || [];
+
+            const searchTerm = document.getElementById("searchInput").value.toLowerCase();
+            const resultsContainer = document.getElementById("resultsContainer");
+            resultsContainer.innerHTML = ""; // Limpiar resultados anteriores
+
+            const results = storedProfiles.filter(profile =>
+                profile.name.toLowerCase().includes(searchTerm)
+            );
+
+            if (results.length > 0) {
+                results.forEach(profile => {
+                    const profileElement = `
+                        <div class="list-group-item">
+                            <div class="d-flex align-items-center">
+                                <img src="${profile.image}" alt="${profile.name}" class="rounded-circle me-3" style="width: 50px; height: 50px;">
+                                <div>
+                                    <h5>${profile.name}</h5>
+                                    <p>Edad: ${profile.age}, Ciudad: ${profile.city}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    resultsContainer.innerHTML += profileElement;
+                });
+            } else {
+                resultsContainer.innerHTML = "<p>No se encontraron resultados.</p>";
+            }
+
+            // Desplazar la página a la sección de resultados
+            document.getElementById("searchResults").scrollIntoView({ behavior: "smooth" });
+        }
+
+        // Resto del código (publicaciones, amigos, mensajes, etc.)
+        let posts = [];
+        let friends = [
+            { name: "Amigo 1", image: "img/p5.jpg" },
+            { name: "Amigo 2", image: "img/p6.jpg" }
+        ];
+        let messages = [
+            { text: "Mensaje 1", image: "img/p7.jpg" },
+            { text: "Mensaje 2", image: "img/p8.jpg" }
+        ];
+        let user = {
+            name: "Nombre de Usuario",
+            bio: "¡Hola! Soy un apasionado del streaming y las redes sociales. Bienvenido a mi perfil.",
+            image: "img/p1.jpg"
+        };
+
+        // Función para renderizar publicaciones
+        function renderPosts() {
+            const postsContainer = document.getElementById("postsContainer");
+            postsContainer.innerHTML = "";
+            posts.forEach((post, index) => {
+                const postElement = `
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <img src="${user.image}" alt="Usuario" class="rounded-circle me-3" style="width: 50px; height: 50px;">
+                                <div>
+                                    <h5 class="mb-0">${user.name}</h5>
+                                    <small class="text-muted">Hace unos momentos</small>
+                                </div>
+                            </div>
+                            <p>${post}</p>
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-outline-primary btn-sm" onclick="likePost(${index})">Me gusta</button>
+                                <button class="btn btn-outline-secondary btn-sm" onclick="commentPost(${index})">Comentar</button>
+                                <button class="btn btn-outline-danger btn-sm" onclick="sharePost(${index})">Compartir</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                postsContainer.innerHTML += postElement;
+            });
+        }
+
+        // Función para publicar
+        document.getElementById("postButton").addEventListener("click", () => {
+            const postContent = document.getElementById("postContent").value;
+            if (postContent.trim() !== "") {
+                posts.unshift(postContent); // Agregar al inicio del array
+                renderPosts();
+                document.getElementById("postContent").value = ""; // Limpiar el textarea
+            }
+        });
+
+        // Función para dar "me gusta"
+        function likePost(index) {
+            alert(`Te gustó la publicación: "${posts[index]}"`);
+        }
+
+        // Función para comentar
+        function commentPost(index) {
+            const comment = prompt("Escribe tu comentario:");
+            if (comment) {
+                alert(`Comentaste: "${comment}" en la publicación: "${posts[index]}"`);
+            }
+        }
+
+        // Función para compartir
+        function sharePost(index) {
+            alert(`Compartiste la publicación: "${posts[index]}"`);
+        }
+
+        // Función para editar perfil
+        function editProfile() {
+            const newName = prompt("Nuevo nombre de usuario:", user.name);
+            const newBio = prompt("Nueva biografía:", user.bio);
+            if (newName) user.name = newName;
+            if (newBio) user.bio = newBio;
+            document.getElementById("username").textContent = user.name;
+        }
+
+        // Función para renderizar amigos
+        function renderFriends() {
+            const friendsList = document.getElementById("friendsList");
+            friendsList.innerHTML = "";
+            friends.forEach((friend, index) => {
+                const friendElement = `
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <img src="${friend.image}" alt="${friend.name}" class="rounded-circle me-3" style="width: 40px; height: 40px;">
+                            <span>${friend.name}</span>
+                        </div>
+                        <button class="btn btn-outline-danger btn-sm" onclick="removeFriend(${index})">Dejar de seguir</button>
+                    </li>
+                `;
+                friendsList.innerHTML += friendElement;
+            });
+        }
+
+        // Función para eliminar amigo
+        function removeFriend(index) {
+            friends.splice(index, 1);
+            renderFriends();
+        }
+
+        // Función para renderizar mensajes
+        function renderMessages() {
+            const messagesList = document.getElementById("messagesList");
+            messagesList.innerHTML = "";
+            messages.forEach((message, index) => {
+                const messageElement = `
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <img src="${message.image}" alt="Usuario" class="rounded-circle me-3" style="width: 40px; height: 40px;">
+                            <span>${message.text}</span>
+                        </div>
+                        <button class="btn btn-primary btn-sm" onclick="replyMessage(${index})">Responder</button>
+                    </li>
+                `;
+                messagesList.innerHTML += messageElement;
+            });
+        }
+
+        // Función para responder mensaje
+        function replyMessage(index) {
+            const reply = prompt("Escribe tu respuesta:");
+            if (reply) {
+                alert(`Respondiste: "${reply}" al mensaje: "${messages[index].text}"`);
+            }
+        }
+
+        // Inicializar la página
+        renderPosts();
+        renderFriends();
+        renderMessages();
+    </script>
+</body>
+</html>
