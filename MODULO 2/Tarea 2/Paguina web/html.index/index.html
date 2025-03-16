@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explora la plataforma más innovadora de streaming y red social. Contenido exclusivo y comunidad global, todo en un solo lugar.">
+    <meta name="keywords" content="streaming, social network, películas, series, comunidad, entretenimiento">
+    <meta name="author" content="InnovateChat">
+    <title>InnovateChat - Revoluciona tu Experiencia</title>
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        /* Estilo para la sección Hero con imagen de fondo */
+        .hero-section {
+            background-image: url('img/hero.jpg'); /* Ruta de la imagen hero.jpg */
+            background-size: cover; /* Ajustar la imagen al tamaño de la sección */
+            background-position: center; /* Centrar la imagen */
+            height: 100vh; /* Altura completa de la pantalla */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white; /* Texto blanco para resaltar */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra para mejorar la legibilidad */
+        }
+
+        /* Estilo para el header con imagen de fondo */
+        nav {
+            background-image: url('img/x.jpg'); /* Ruta de la imagen x.jpg */
+            background-size: cover; /* Ajustar la imagen al tamaño del header */
+            background-position: center; /* Centrar la imagen */
+            color: white; /* Texto blanco para resaltar */
+        }
+
+        /* Estilo para el texto en el header */
+        nav a, nav span, nav button {
+            color: white !important; /* Asegurar que el texto sea blanco */
+        }
+
+        /* Estilo para el campo de búsqueda */
+        #searchInput {
+            color: black; /* Cambia el color del texto a negro */
+            background-color: white; /* Fondo blanco */
+        }
+
+        /* Scroll suave */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Estilo para el menú flotante */
+        .floating-menu {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        /* Estilo para la sección de mensajes */
+        #messages {
+            background: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            color: white; /* Texto blanco para mejor contraste */
+        }
+
+        /* Estilo para las tarjetas de mensajes */
+        .message-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .message-card h5 {
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .message-card p {
+            margin: 0;
+            color: #e0e0e0;
+        }
+
+        .message-card small {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.875rem;
+        }
+
+        /* Animación para los mensajes */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Navigation -->
+    <nav class="shadow fixed w-full top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="#" class="text-xl font-bold">InnovateChat</a>
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <button id="profileDropdown" class="flex items-center space-x-2 focus:outline-none">
+                            <img src="img/p1.jpg" alt="Foto de perfil" class="w-10 h-10 rounded-full">
+                            <span id="username" class="text-white">Nombre de Usuario</span>
+                        </button>
+                        <div id="dropdownMenu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg">
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100" onclick="editProfile()">Editar Perfil</a>
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Cerrar Sesión</a>
+                        </div>
+                    </div>
+                    <button class="lg:hidden focus:outline-none">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="lg:flex lg:items-center lg:space-x-4 hidden">
+                <a href="#feed" class="block py-2 text-white hover:text-gray-200">Inicio</a>
+                <a href="#friends" class="block py-2 text-white hover:text-gray-200">Amigos</a>
+                <a href="#messages" class="block py-2 text-white hover:text-gray-200">Mensajes</a>
+                <form class="flex" onsubmit="searchProfiles(event)">
+                    <input class="form-input px-4 py-2 rounded-l-lg" type="search" id="searchInput" placeholder="Buscar perfiles">
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded-r-lg" type="submit">Buscar</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section animate__animated animate__fadeIn">
+        <div class="bg-black bg-opacity-50 p-8 rounded-lg text-center">
+            <h1 class="text-4xl font-bold mb-4">Bienvenido a InnovateChat</h1>
+            <p class="mb-6">La plataforma más innovadora red social.</p>
+            <a href="#feed" class="bg-blue-500 text-white px-6 py-2 rounded-lg animate__animated animate__bounceIn">Explorar</a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-20">
+        <!-- Resultados de Búsqueda -->
+        <section id="searchResults" class="mb-8 animate__animated animate__fadeInUp">
+            <h2 class="text-2xl font-bold text-center mb-6">Resultados de Búsqueda</h2>
+            <div class="max-w-2xl mx-auto">
+                <div id="resultsContainer" class="space-y-4"></div>
+            </div>
+        </section>
+
+        <!-- Amigos -->
+        <section id="friends" class="mb-8 animate__animated animate__fadeInUp">
+            <h2 class="text-2xl font-bold text-center mb-6">Amigos</h2>
+            <div class="max-w-2xl mx-auto">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h5 class="text-xl font-bold mb-4">Lista de Amigos</h5>
+                    <ul id="friendsList" class="space-y-2"></ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mensajes -->
+        <section id="messages" class="mb-8 animate__animated animate__fadeInUp">
+            <h2 class="text-2xl font-bold text-center mb-6 text-white">Mensajes</h2> <!-- Texto blanco -->
+            <div class="max-w-2xl mx-auto">
+                <div id="messagesList" class="space-y-4"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Menú de mensajes flotante -->
+    <div class="floating-menu">
+        <button class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-lg" data-bs-toggle="modal" data-bs-target="#messageModal">
+            Enviar Mensaje
+        </button>
+    </div>
+
+    <!-- Modal para enviar mensajes -->
+    <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="messageModalLabel">Enviar Mensaje</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="chatForm">
+                        <div class="mb-3">
+                            <label for="friendSelect" class="form-label">Seleccionar Amigo</label>
+                            <select class="form-select" id="friendSelect">
+                                <!-- Aquí se llenará dinámicamente la lista de amigos -->
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="chatInput" class="form-label">Mensaje</label>
+                            <textarea id="chatInput" class="form-control" rows="3" placeholder="Escribe un mensaje..." required></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" onclick="sendChatMessage()">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white text-center py-4">
+        <p>&copy; 2025 InnovateStream. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Bootstrap JS y dependencias -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+    <!-- JavaScript para interactividad -->
+    <script>
+        // Recuperar perfiles y amigos desde localStorage
+        let profiles = JSON.parse(localStorage.getItem('profiles')) || [];
+        let friends = JSON.parse(localStorage.getItem('friends')) || [];
+        let messages = JSON.parse(localStorage.getItem('messages')) || [];
+
+        // Función para buscar perfiles
+        function searchProfiles(event) {
+            event.preventDefault();
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const resultsContainer = document.getElementById('resultsContainer');
+            resultsContainer.innerHTML = ""; // Limpiar resultados anteriores
+
+            const results = profiles.filter(profile =>
+                profile.name.toLowerCase().includes(searchTerm)
+            );
+
+            if (results.length > 0) {
+                results.forEach(profile => {
+                    const profileElement = `
+                        <div class="bg-white p-4 rounded-lg shadow mb-4">
+                            <div class="flex items-center">
+                                <img src="${profile.image}" alt="${profile.name}" class="w-10 h-10 rounded-full mr-3">
+                                <div>
+                                    <h5 class="font-bold">${profile.name}</h5>
+                                    <p>Edad: ${profile.age}, Ciudad: ${profile.city}</p>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2 mt-2">
+                                <button class="bg-blue-500 text-white px-4 py-2 rounded" onclick="addFriend(${profile.id})">Agregar Amigo</button>
+                                <button class="bg-green-500 text-white px-4 py-2 rounded" onclick="openMessageModal(${profile.id})">Enviar Mensaje</button>
+                            </div>
+                        </div>
+                    `;
+                    resultsContainer.innerHTML += profileElement;
+                });
+            } else {
+                resultsContainer.innerHTML = "<p>No se encontraron resultados.</p>";
+            }
+        }
+
+        // Función para agregar amigos
+        function addFriend(profileId) {
+            const profile = profiles.find(p => p.id === profileId);
+            if (profile) {
+                if (!friends.some(f => f.id === profile.id)) {
+                    friends.push(profile);
+                    localStorage.setItem('friends', JSON.stringify(friends));
+                    alert(`${profile.name} ha sido agregado a tus amigos.`);
+                    renderFriends();
+                    fillFriendSelect(); // Actualizar el menú de mensajes
+                } else {
+                    alert(`${profile.name} ya es tu amigo.`);
+                }
+            }
+        }
+
+        // Función para abrir el modal de mensajes con un amigo seleccionado
+        function openMessageModal(profileId) {
+            const profile = profiles.find(p => p.id === profileId);
+            if (profile) {
+                const friendSelect = document.getElementById('friendSelect');
+                friendSelect.value = profile.id;
+                bootstrap.Modal.getInstance(document.getElementById('messageModal')).show();
+            }
+        }
+
+        // Función para llenar el menú desplegable de amigos
+        function fillFriendSelect() {
+            const friendSelect = document.getElementById('friendSelect');
+            friendSelect.innerHTML = ''; // Limpiar lista
+            friends.forEach(friend => {
+                const option = document.createElement('option');
+                option.value = friend.id;
+                option.textContent = friend.name;
+                friendSelect.appendChild(option);
+            });
+        }
+
+        // Función para enviar mensajes
+        function sendChatMessage() {
+            const friendSelect = document.getElementById('friendSelect');
+            const chatInput = document.getElementById('chatInput');
+            const selectedFriendId = friendSelect.value;
+            const messageText = chatInput.value.trim();
+
+            if (messageText && selectedFriendId) {
+                const selectedFriend = friends.find(f => f.id == selectedFriendId);
+                messages.push({
+                    text: messageText,
+                    date: new Date().toISOString(),
+                    friendId: selectedFriend.id,
+                    friendName: selectedFriend.name
+                });
+                localStorage.setItem('messages', JSON.stringify(messages));
+                chatInput.value = ''; // Limpiar el campo de texto
+                renderMessages(); // Actualizar la lista de mensajes
+                bootstrap.Modal.getInstance(document.getElementById('messageModal')).hide(); // Cerrar el modal
+            }
+        }
+
+        // Función para renderizar mensajes
+        function renderMessages() {
+            const messagesList = document.getElementById('messagesList');
+            messagesList.innerHTML = "";
+            messages.forEach((message, index) => {
+                const friend = friends.find(f => f.id === message.friendId);
+                if (friend) {
+                    const messageElement = `
+                        <div class="message-card">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <h5>${friend.name}</h5>
+                                    <p>${message.text}</p>
+                                    <small>${new Date(message.date).toLocaleString()}</small>
+                                </div>
+                                <button class="bg-red-500 text-white px-2 py-1 rounded" onclick="deleteMessage(${index})">Eliminar</button>
+                            </div>
+                        </div>
+                    `;
+                    messagesList.innerHTML += messageElement;
+                }
+            });
+        }
+
+        // Función para eliminar mensajes
+        function deleteMessage(index) {
+            messages.splice(index, 1);
+            localStorage.setItem('messages', JSON.stringify(messages));
+            renderMessages();
+        }
+
+        // Función para renderizar amigos
+        function renderFriends() {
+            const friendsList = document.getElementById('friendsList');
+            friendsList.innerHTML = "";
+            friends.forEach(friend => {
+                const friendElement = `
+                    <li class="bg-white p-4 rounded-lg shadow mb-4">
+                        <div class="flex items-center">
+                            <img src="${friend.image}" alt="${friend.name}" class="w-10 h-10 rounded-full mr-3">
+                            <div>
+                                <h5 class="font-bold">${friend.name}</h5>
+                                <p>Edad: ${friend.age}, Ciudad: ${friend.city}</p>
+                            </div>
+                        </div>
+                        <button class="bg-red-500 text-white px-4 py-2 rounded mt-2" onclick="removeFriend(${friend.id})">Dejar de seguir</button>
+                    </li>
+                `;
+                friendsList.innerHTML += friendElement;
+            });
+        }
+
+        // Función para eliminar amigos
+        function removeFriend(profileId) {
+            friends = friends.filter(f => f.id !== profileId);
+            localStorage.setItem('friends', JSON.stringify(friends));
+            renderFriends();
+            fillFriendSelect(); // Actualizar el menú de mensajes
+        }
+
+        // Inicializar la página
+        fillFriendSelect();
+        renderMessages();
+        renderFriends();
+    </script>
+</body>
+</html>

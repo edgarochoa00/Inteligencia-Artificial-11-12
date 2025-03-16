@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InnovateStream - Base de Datos</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+        }
+        .profile-card {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .profile-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-right: 15px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">Base de Datos de Usuarios</h1>
+        <div id="profilesContainer"></div>
+    </div>
+
+    <script>
+        // Listas de nombres y apellidos más extensas
+        const names = {
+            male: ["Juan", "Carlos", "Luis", "Pedro", "José", "Miguel", "Jorge", "Francisco", "Alejandro", "Daniel", "Manuel", "Ricardo", "Fernando", "Roberto", "Sergio"],
+            female: ["María", "Ana", "Laura", "Sofía", "Lucía", "Isabel", "Carmen", "Elena", "Patricia", "Rosa", "Gabriela", "Claudia", "Adriana", "Verónica", "Teresa"]
+        };
+        const lastNames = [
+            "Flores", "Morales", "Ortiz", "Gutiérrez", "Vargas", "Castro", "Romero", "Sánchez", "Alvarez", "Mendoza",
+            "Rojas", "Guerrero", "Jiménez", "Ruiz", "Medina", "Silva", "Delgado", "Reyes", "Cruz", "Navarro",
+            "Acosta", "Miranda", "Vega", "Castillo", "Valdez", "Campos", "Ríos", "Fuentes", "Aguilar", "Molina",
+            "Suárez", "Ponce", "Santos", "Cortés", "Ortega", "Núñez", "Paredes", "Cabrera", "Cárdenas", "Salazar",
+            "Mejía", "Aguirre", "Zúñiga", "Bravo", "Rivas", "Espinoza", "Valencia", "Franco", "Gallegos", "León",
+            "Méndez", "Orozco", "Quintero", "Rosales", "Soto", "Tapia", "Vázquez", "Zamora", "Cervantes", "Figueroa"
+        ];
+
+        // Generar 500 perfiles ficticios
+        const generateProfiles = () => {
+            const cities = ["Ciudad de México", "Guadalajara", "Monterrey", "Puebla", "Tijuana", "León", "Querétaro", "Mérida", "Cancún", "Acapulco"];
+            const countries = ["México"];
+            const profiles = [];
+
+            for (let i = 1; i <= 500; i++) {
+                const gender = Math.random() > 0.5 ? "male" : "female"; // Género aleatorio
+                const name = names[gender][Math.floor(Math.random() * names[gender].length)];
+                const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
+                const city = cities[Math.floor(Math.random() * cities.length)];
+                const country = countries[Math.floor(Math.random() * countries.length)];
+                const image = `https://picsum.photos/80/80?random=${i}`; // Imágenes de paisajes o autos
+
+                profiles.push({
+                    id: i,
+                    name: `${name} ${lastName}`,
+                    age: Math.floor(Math.random() * 39) + 15, // 
+                    city,
+                    country,
+                    image,
+                    gender
+                });
+            }
+
+            return profiles;
+        };
+
+        // Guardar perfiles en localStorage
+        const profiles = generateProfiles();
+        localStorage.setItem('profiles', JSON.stringify(profiles));
+
+        // Mostrar los perfiles en la página
+        const profilesContainer = document.getElementById('profilesContainer');
+        let profilesHTML = '';
+        profiles.forEach(profile => {
+            profilesHTML += `
+                <div class="profile-card d-flex align-items-center">
+                    <img src="${profile.image}" alt="${profile.name}">
+                    <div>
+                        <h3>${profile.name}</h3>
+                        <p><strong>Edad:</strong> ${profile.age}</p>
+                        <p><strong>Ciudad:</strong> ${profile.city}</p>
+                        <p><strong>País:</strong> ${profile.country}</p>
+                    </div>
+                </div>
+            `;
+        });
+        profilesContainer.innerHTML = profilesHTML;
+    </script>
+</body>
+</html>
