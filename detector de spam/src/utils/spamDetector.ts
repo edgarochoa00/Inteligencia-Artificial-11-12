@@ -1,7 +1,7 @@
 // Utilidad completa de detección de spam
 export class SpamDetector {
   private static readonly SPAM_KEYWORDS = [
-    'viagra', 'cialis', 'casino', 'lotería', 'ganador', 
+    'cialis', 'casino', 'lotería', 'ganador', 
     'herencia', 'príncipe', 'transferencia bancaria', 'oportunidad de inversión',
     'criptomoneda', 'bitcoin', 'forex', 'trading', 'ganar dinero',
     'trabajo desde casa', 'dinero rápido', 'hazte rico', 'dinero gratis',
