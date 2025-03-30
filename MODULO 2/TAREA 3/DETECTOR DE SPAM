@@ -1,0 +1,12 @@
+En esta tarea es sobre un detector de spam el cual se programo con python 
+basado en las diapositivas vistas en clase donde se utiliza el teorema de 
+bayes y dataset que es un archivo .csv contiene mas de 5000 mensajes 
+como simulando el correo de una persona que lo utiliza mucho 
+
+Asi mismo se dejara un archivo PDF que explica tanto el procedimiento 
+como las CAPTURAS de ejecucion del programa 
+
+El programa tambien se dejara en esta carpeta con terminacion
+.ipynb este estara en una sola celda de codigo
+
+las referencias estaran al final del archivo PDF 
