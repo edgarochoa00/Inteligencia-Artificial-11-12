@@ -1,0 +1,6 @@
+Este repositorio contiene el desarrollo de un sistema experto
+diseñado para apoyar en el diagnóstico de influenza, basado en criterios 
+epidemiológicos. El sistema utiliza reglas de inferencia
+obtenidas de una tesis validada (UAdeO) para evaluar síntomas como 
+fiebre, tos, dolor muscular y 
+factores de riesgo, proporcionando.
