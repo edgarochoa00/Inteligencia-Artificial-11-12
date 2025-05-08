@@ -1,0 +1,26 @@
+ # Sistema Experto de Diagnóstico Respiratorio 🩺🤖
+
+Un sistema experto basado en lógica proposicional para asistir en el diagnóstico de
+enfermedades respiratorias, desarrollado en Python.
+
+---
+
+## 🛠️ Tecnologías Utilizadas  
+- **Entorno de Desarrollo**: Visual Studio Code  
+- **Lenguaje**: Python 3.9+  
+- **Bibliotecas Principales**:  
+  - `tkinter` para la interfaz gráfica.  
+  - `logging` para registro de actividades.  
+- **Gestión de Proyecto**:  
+  - Control de versiones con Git.  
+  - Documentación técnica integrada en el código.
+
+---
+
+## 🚀 Características Clave  
+- **Base de Conocimiento**:  
+  - 50+ síntomas y signos clínicos codificados (ej: fiebre alta, saturación de oxígeno).  
+  - 14 enfermedades respiratorias modeladas (COVID-19, Neumonía Bacteriana, Asma, etc.).  
+- **Interfaz Gráfica**:  
+  - Panel interactivo para selección de síntomas.  
+  - Visualización de diagnósticos prioritarios con barras de progreso.  
