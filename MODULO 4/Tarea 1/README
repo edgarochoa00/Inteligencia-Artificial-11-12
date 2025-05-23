@@ -1,0 +1,12 @@
+# Canal de Reconocimiento de Emociones Faciales 
+
+Programa en Python para el reconocimiento de emociones faciales 
+con aumento de datos, optimizado para Google Colab.
+
+## Características ✨
+
+- **Validación automática**: Garantiza la integridad de las etiquetas de las imágenes a partir de los metadatos CSV
+- **Aumento de datos**: Albumentaciones y Keras (rotaciones, volteos, ruido, etc.)
+- **División estratificada**: 80/10/10 entrenamiento/validación/prueba con equilibrio de clases
+- **Diagnóstico visual**: Imágenes de muestra
+- **Compatible con Colab**: Optimización de memoria de GPU y compatibilidad con carga ZIP
