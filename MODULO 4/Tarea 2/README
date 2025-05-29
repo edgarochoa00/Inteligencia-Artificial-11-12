@@ -1,0 +1,25 @@
+Sistema de Reconocimiento de Emociones con LBPH
+
+LINK DEL VIDEO: https://www.youtube.com/watch?v=6hqg5YL9JMc
+
+Descripción
+Este proyecto implementa un sistema de reconocimiento de emociones 
+en tiempo real utilizando LBPH (Local Binary Patterns Histograms) 
+de OpenCV. El sistema puede detectar cuatro emociones principales:
+Enojo, Felicidad, Sorpresa y Tristeza.
+
+Características principales:
+Interfaz gráfica intuitiva desarrollada con Tkinter
+Detección facial en tiempo real con la cámara web
+Algoritmo LBPH para reconocimiento de emociones
+Sistema de confirmación para evitar falsos positivos
+Visualización de nivel de confianza en las predicciones
+Énfasis especial en la detección de felicidad
+Requisitos del sistema
+
+Python 3.7 o superior
+OpenCV 4.x
+Pillow (PIL)
+Numpy
+Tkinter (normalmente incluido con Python)
+
